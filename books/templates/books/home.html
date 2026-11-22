@@ -1,0 +1,35 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<form method="GET" class="mb-4 flex gap-2">
+    <input type="text" name="q" placeholder="किताब का नाम खोजें..." class="flex-grow border p-2 rounded-lg bg-white">
+    <button class="bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold">Search</button>
+</form>
+<div class="flex gap-2 overflow-x-auto pb-4 mb-4">
+    <a href="/" class="px-3 py-1 rounded-full bg-indigo-600 text-white text-sm">सभी</a>
+    <a href="/?category=coding" class="px-3 py-1 rounded-full bg-white border text-sm">Coding</a>
+    <a href="/?category=story" class="px-3 py-1 rounded-full bg-white border text-sm">कहानियाँ</a>
+    <a href="/?category=motivation" class="px-3 py-1 rounded-full bg-white border text-sm">Motivation</a>
+    <a href="/?category=spirituality" class="px-3 py-1 rounded-full bg-white border text-sm">आध्यात्म</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    {% for book in books %}
+    <a href="{% url 'book_detail' book.id %}" class="bg-white rounded-lg shadow hover:shadow-md overflow-hidden flex flex-col">
+        {% if book.cover %}
+            <img src="{{ book.cover.url }}" class="w-full h-56 object-cover">
+        {% else %}
+            <div class="w-full h-56 bg-indigo-100 flex items-center justify-center p-3 text-center font-bold text-indigo-900">{{ book.title }}</div>
+        {% endif %}
+        <div class="p-3 flex-grow flex flex-col justify-between">
+            <div>
+                <h3 class="font-bold text-sm line-clamp-2">{{ book.title }}</h3>
+                <p class="text-xs text-gray-500 mt-1">{{ book.author.username }}</p>
+            </div>
+            <p class="mt-3 font-bold text-indigo-700">{% if book.price == 0 %}FREE{% else %}₹{{ book.price }}{% endif %}</p>
+        </div>
+    </a>
+    {% empty %}
+        <p class="col-span-4 text-center text-gray-500 py-12">अभी कोई किताब लाइव नहीं है। ऊपर "+ किताब डालें" पर क्लिक करके पहली किताब पब्लिश करें!</p>
+    {% endfor %}
+</div>
+{% endblock %}
+ 
