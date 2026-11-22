@@ -1,0 +1,21 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow space-y-4">
+    {% csrf_token %}
+    <h2 class="text-xl font-bold">नई किताब पब्लिश करें</h2>
+    <input type="text" name="title" placeholder="किताब का नाम" required class="w-full border p-2 rounded">
+    <textarea name="description" rows="4" placeholder="किताब का विवरण (Description)" required class="w-full border p-2 rounded"></textarea>
+    <select name="category" class="w-full border p-2 rounded">
+        <option value="coding">Coding & Tech</option>
+        <option value="story">Hindi Stories</option>
+        <option value="motivation">Motivation</option>
+        <option value="spirituality">Spirituality</option>
+    </select>
+    <input type="text" name="language" value="Hindi" class="w-full border p-2 rounded">
+    <input type="number" name="price" placeholder="कीमत ₹ (फ्री के लिए 0 लिखें)" value="0" class="w-full border p-2 rounded">
+    <div><label class="block text-sm font-semibold mb-1">कवर फोटो:</label><input type="file" name="cover" accept="image/*"></div>
+    <div><label class="block text-sm font-semibold mb-1">किताब की Word फाइल (.docx):</label><input type="file" name="docx_file" accept=".docx" required></div>
+    <button class="w-full bg-indigo-700 text-white py-2.5 rounded font-bold">Publish Book</button>
+</form>
+{% endblock %}
+ 
