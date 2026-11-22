@@ -1,0 +1,18 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow flex flex-col md:flex-row gap-6">
+    {% if book.cover %}<img src="{{ book.cover.url }}" class="w-48 h-72 object-cover rounded mx-auto md:mx-0">{% endif %}
+    <div>
+        <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded uppercase font-semibold">{{ book.category }}</span>
+        <h1 class="text-2xl font-bold mt-2">{{ book.title }}</h1>
+        <p class="text-gray-500 text-sm mb-4">लेखक: {{ book.author.username }} | भाषा: {{ book.language }}</p>
+        <p class="text-gray-700 whitespace-pre-line mb-6">{{ book.description }}</p>
+        {% if has_access %}
+            <a href="{% url 'read_book' book.id 1 %}" class="bg-green-600 text-white px-6 py-3 rounded-lg font-bold inline-block">📖 अभी पढ़ें (Read Now)</a>
+        {% else %}
+            <a href="{% url 'buy_book' book.id %}" class="bg-amber-500 text-black px-6 py-3 rounded-lg font-bold inline-block">🛒 ₹{{ book.price }} में खरीदें और पढ़ें</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+ 
