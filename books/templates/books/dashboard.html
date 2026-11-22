@@ -1,0 +1,17 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<div class="bg-indigo-50 border border-indigo-200 p-4 rounded-lg mb-6 flex justify-between items-center">
+    <div><p class="text-sm text-gray-600">आपकी कुल रॉयल्टी कमाई (70%)</p><h2 class="text-2xl font-bold text-indigo-800">₹{{ earnings }}</h2></div>
+    <a href="{% url 'publish_book' %}" class="bg-indigo-700 text-white px-4 py-2 rounded font-bold">+ नई किताब</a>
+</div>
+<h3 class="font-bold text-lg mb-3">आपकी किताबें</h3>
+<div class="bg-white rounded-lg shadow divide-y">
+    {% for book in my_books %}
+    <div class="p-4 flex justify-between items-center">
+        <div><p class="font-bold">{{ book.title }}</p><p class="text-xs text-gray-500">कीमत: ₹{{ book.price }}</p></div>
+        <span class="px-3 py-1 rounded-full text-xs font-bold {% if book.status == 'live' %}bg-green-100 text-green-800{% else %}bg-amber-100 text-amber-800{% endif %}">{{ book.get_status_display }}</span>
+    </div>
+    {% empty %}<p class="p-6 text-gray-500 text-center">आपने अभी कोई किताब अपलोड नहीं की है।</p>{% endfor %}
+</div>
+{% endblock %}
+ 
