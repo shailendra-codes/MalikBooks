@@ -1,0 +1,16 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<div id="readerBox" class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow select-none" oncontextmenu="return false;">
+    <div class="flex justify-between items-center border-b pb-3 mb-4">
+        <a href="{% url 'book_detail' book.id %}" class="text-sm text-indigo-600 font-semibold">← वापस</a>
+        <h2 class="font-bold text-sm truncate max-w-xs">{{ book.title }}</h2>
+        <button onclick="document.getElementById('readerBox').classList.toggle('bg-gray-900');document.getElementById('readerBox').classList.toggle('text-gray-100');" class="text-xs border px-2 py-1 rounded">🌙 Dark Mode</button>
+    </div>
+    <div class="leading-relaxed text-lg whitespace-pre-line">{{ chapter.content }}</div>
+    <div class="flex justify-between mt-8 pt-4 border-t">
+        {% if prev_ch %}<a href="{% url 'read_book' book.id prev_ch %}" class="px-4 py-2 bg-gray-200 text-black rounded">← पिछला</a>{% else %}<span></span>{% endif %}
+        {% if next_ch %}<a href="{% url 'read_book' book.id next_ch %}" class="px-4 py-2 bg-indigo-600 text-white rounded">अगला →</a>{% endif %}
+    </div>
+</div>
+{% endblock %}
+ 
