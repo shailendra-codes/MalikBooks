@@ -1,0 +1,8 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<form method="POST" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow space-y-4">
+    {% csrf_token %}<h2 class="text-xl font-bold">लॉगिन करें</h2>{{ form.as_p }}
+    <button class="w-full bg-indigo-700 text-white py-2 rounded font-bold">Login</button>
+</form>
+{% endblock %}
+ 
